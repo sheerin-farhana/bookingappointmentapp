@@ -9,6 +9,10 @@ let itemList = document.getElementById('items');
             deleteButton.id = "delete";
             deleteButton.value = "DELETE";
             //console.log(deleteButton);
+            let editButton = document.createElement('input');
+            editButton.type = "button"
+            editButton.id = "edit";
+            editButton.value = "Edit";
             
             let details_obj = {name:event.target.name.value,
                         email:event.target.email.value,
@@ -21,6 +25,7 @@ let itemList = document.getElementById('items');
             li.appendChild(document.createTextNode(event.target.email.value + " - "));
             li.appendChild(document.createTextNode(event.target.phone.value.toString() ));
             li.appendChild(deleteButton);
+            li.appendChild(editButton);
             itemList.appendChild(li);
             
 
@@ -39,6 +44,24 @@ let itemList = document.getElementById('items');
             localStorage.removeItem(keyValue);
 
         }
+
+        editButton.addEventListener('click',onEdit);
+        let name = event.target.name.value;
+        let email = event.target.email.value;
+        let phone = event.target.phone.value;
+
+
+        function onEdit(e){
+            e.preventDefault();
+            let parentNode = e.target.parentNode;
+            parentNode.remove();
+            //let details = e.target
+            localStorage.removeItem(keyValue);
+            document.getElementById('name').value = name;
+            document.getElementById('email').value = email;
+            document.getElementById('phone').value = phone;
+        }
+
 
 
 
