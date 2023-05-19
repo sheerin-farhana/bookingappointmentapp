@@ -59,43 +59,46 @@
         <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" required ><br><br>
         <b><label for="phone" class="form-label" >Mobile Number</label></b><br><br>
         <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter Mobile Number" required ><br><br>
-        <b><label for="date" class="form-label" >Select appointment Date </label></b><br><br>
-        <input type="date" id="date" name="date" class="form-control" required width="600px" required><br><br>
-        <b><label for="time" class="form-label">Select appointment time </label></b><br><br>
-        <input type="time" id="time" name="time" class="form-control" required> <br><br>
+        
         
         <center><input type="submit" id="submit" name="submit"><br></center>
+        <div>
+
+        </div>
+        <ul id="items" >
+
+        </ul>
         
         </fieldset>
     </form>
 </div>
 
     <script>
+        let itemList = document.getElementById('items');
         function onsignup(event){
             event.preventDefault();
+            let li = document.createElement('li');
+            //li.className = "list-group-item";
+            
             let details_obj = {name:event.target.name.value,
                         email:event.target.email.value,
                         phone:event.target.phone.value.toString(),
-                        date:event.target.date.value.toString(),
-                        time:event.target.time.value.toString()
                         }
             
             let userdetails_obj = JSON.stringify(details_obj);
-            localStorage.setItem("myobj" ,userdetails_obj );
+            localStorage.setItem(event.target.name.value ,userdetails_obj );
+            li.appendChild(document.createTextNode(event.target.name.value + " - "));
+            li.appendChild(document.createTextNode(event.target.email.value + " - "));
+            li.appendChild(document.createTextNode(event.target.phone.value.toString() ));
+            itemList.appendChild(li);
 
 
 
-            /*localStorage.setItem('name',event.target.name.value);
-            localStorage.setItem('email',event.target.email.value);
-            localStorage.setItem('phone',event.target.phone.value.toString());
-            localStorage.setItem('Date',event.target.date.value.toString());
-            localStorage.setItem('Time',event.target.time.value.toString());*/
-
-            console.log(event.target.name.value);
+            /*console.log(event.target.name.value);
             console.log(event.target.email.value);
             console.log(event.target.phone.value);
             console.log(event.target.date.value);
-            console.log(event.target.time.value);
+            console.log(event.target.time.value);*/
         }
         const form =document.querySelector("form");
         form.addEventListener(submit , e =>{

@@ -41,6 +41,6 @@ function onsubmit(e){
         nameInput.value='';
         emailInput='';
     }
-    console.log(myForm);
+    
 
 }
