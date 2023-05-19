@@ -12,8 +12,11 @@
         }
         input{
             font-size: 25px;
-            width: 650px;
+            width: 100;
             height: 30px;
+        }
+        ul{
+            font-weight: 'bold';
         }
         h2{
             text-align: center;
@@ -73,41 +76,8 @@
     </form>
 </div>
 
-    <script>
-        let itemList = document.getElementById('items');
-        function onsignup(event){
-            event.preventDefault();
-            let li = document.createElement('li');
-            //li.className = "list-group-item";
-            
-            let details_obj = {name:event.target.name.value,
-                        email:event.target.email.value,
-                        phone:event.target.phone.value.toString(),
-                        }
-            
-            let userdetails_obj = JSON.stringify(details_obj);
-            localStorage.setItem(event.target.name.value ,userdetails_obj );
-            li.appendChild(document.createTextNode(event.target.name.value + " - "));
-            li.appendChild(document.createTextNode(event.target.email.value + " - "));
-            li.appendChild(document.createTextNode(event.target.phone.value.toString() ));
-            itemList.appendChild(li);
-
-
-
-            /*console.log(event.target.name.value);
-            console.log(event.target.email.value);
-            console.log(event.target.phone.value);
-            console.log(event.target.date.value);
-            console.log(event.target.time.value);*/
-        }
-        const form =document.querySelector("form");
-        form.addEventListener(submit , e =>{
-            if(!form.checkValidity()){
-                e.preventDefault();
-
-            }
-            form.classList.add('was-validated');
-        })
+    <script src="main.js">
+        
     </script>
 </body>
 </html>

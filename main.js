@@ -1,46 +1,64 @@
-const btn = document.querySelector('.btn');
+let itemList = document.getElementById('items');
+        function onsignup(event){
+            event.preventDefault();
+            let li = document.createElement('li');
+            //li.className = "list-group-item";
 
-btn.addEventListener('mouseover',(e) => {
-    e.preventDefault();
-    const nameInput = document.querySelector('#name');
-    console.log(nameInput.value);
-    const emailInput = document.querySelector('#email');
-    console.log(emailInput.value);
-});
+            let deleteButton = document.createElement('input');
+            deleteButton.type = "button"
+            deleteButton.id = "delete";
+            deleteButton.value = "DELETE";
+            //console.log(deleteButton);
+            
+            let details_obj = {name:event.target.name.value,
+                        email:event.target.email.value,
+                        phone:event.target.phone.value.toString(),
+                        }
+            
+            let userdetails_obj = JSON.stringify(details_obj);
+            localStorage.setItem(event.target.name.value ,userdetails_obj );
+            li.appendChild(document.createTextNode(event.target.name.value + " - "));
+            li.appendChild(document.createTextNode(event.target.email.value + " - "));
+            li.appendChild(document.createTextNode(event.target.phone.value.toString() ));
+            li.appendChild(deleteButton);
+            itemList.appendChild(li);
+            
 
-btn.addEventListener('mouseout',(e) => {
-    e.preventDefault();
-    const nameInput = document.querySelector('#name');
-    console.log(nameInput.value);
-    const emailInput = document.querySelector('#email');
-    console.log(emailInput.value);
-});
 
-//starts here 
+            //let deleteElement = document.getElementsByTagName('li').firstElementChild;
+            //console.log(deleteElement);
+            deleteButton.addEventListener('click',ondelete);
+            let keyValue = event.target.name.value;
+        
 
-const myForm = document.querySelector('#my-form');
-const nameInput = document.querySelector('#name');
-const emailInput = document.querySelector('#email');
-const msg = document.querySelector('.msg');
-const userList = document.querySelector('#users');
+        function ondelete(e){
+            e.preventDefault();
+            let parentNode = e.target.parentNode;
+            parentNode.remove();
+            //let details = e.target
+            localStorage.removeItem(keyValue);
 
-myForm.addEventListener('submit' , onsubmit);
+        }
 
-function onsubmit(e){
-    e.preventDefault();
 
-    if(nameInput.value ==' '|| emailInput.value==' '){
-        msg.classList.add('error');
-        msg.innerHTML = 'Please enter all fields';
-    }
-    else{
-        const li = document.createElement('li');
-        li.appendChild(document.createTextNode(`${nameInput.value} : ${emailInput.value}`));
-        userList.appendChild(li);
 
-        nameInput.value='';
-        emailInput='';
-    }
-    
+            /*console.log(event.target.name.value);
+            console.log(event.target.email.value);
+            console.log(event.target.phone.value);
+            console.log(event.target.date.value);
+            console.log(event.target.time.value);*/
+        }
+        
 
-}
+
+
+
+
+        const form =document.querySelector("form");
+        form.addEventListener(submit , e =>{
+            if(!form.checkValidity()){
+                e.preventDefault();
+
+            }
+            form.classList.add('was-validated');
+        })
